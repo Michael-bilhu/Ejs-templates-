@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+var data = require('./data/test.json');
 
 app.set('view engine','ejs')
 
@@ -16,6 +17,16 @@ app.get('/', (req, res) => {
     'title':title,
     'heading':heading
   })
+})
+
+app.get('/users', (req, res) => {
+  var title = "Our users"
+  var heading = "My Website"
+  res.render('users/index',{
+    'title':title,
+    'heading':heading,
+    'users':data
+  });
 })
 
 app.get('/animal', (req, res) => {
@@ -47,4 +58,5 @@ app.get('/sport', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+  console.log(data);
 })
